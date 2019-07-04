@@ -79,7 +79,7 @@ If you don't want a prefix, set it to an empty string \"\"."
            (user (or f5vpn-user (plist-get plist :user)))
            (prefix (or f5vpn-pass-prefix (funcall (plist-get plist :secret))))
            (pass (concat (or prefix "") password)))
-      (async-start-process "f5vpn start" f5vpn-exec #'f5vpn-info
+      (async-start-process "f5vpn start" f5vpn-exec 'ignore
                            "--start"
                            "--host" f5vpn-host
                            "--user" user
@@ -90,7 +90,7 @@ If you don't want a prefix, set it to an empty string \"\"."
 (defun f5vpn-disconnect ()
   "Disconnect VPN."
   (interactive)
-  (async-start-process "f5vpn stop" f5vpn-exec #'f5vpn-info "--stop"))
+  (async-start-process "f5vpn stop" f5vpn-exec 'ignore "--stop"))
 
 ;;;###autoload
 (defun f5vpn-info ()
